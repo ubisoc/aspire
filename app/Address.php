@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
 {
@@ -14,6 +15,15 @@ class Address extends Model
    * @var array
    */
   protected $dates = ['deleted_at'];
+
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+      'line1', 'line2', 'line3', 'city', 'country', 'postcode',
+  ];
 
   /**
    * Get company associated with this address.

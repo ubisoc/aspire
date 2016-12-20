@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Address;
+use App\Account;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -48,9 +50,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'mobile_number' => 'required|numeric',
+            'line1' => 'required|max:255',
+            'city' => 'required|max:255',
+            'country' => 'required|max:255',
+            'postcode' => 'required|max:255',
         ]);
     }
 
@@ -62,10 +70,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        $address = Address::create([
+            'line1' => $data['line1'],
+            'line2' => $data['line2'],
+            'line3' => $data['line3'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'postcode' => $data['postcode'],
         ]);
+
+        $user = new User;
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->mobile_number = $data['mobile_number'];
+        $user->address()->save($address);
+
+        $account = new Account;
+        $account->setType('C');
+        $account->save();
+        $account->users()->save($user);
+
+        return $user;
     }
 }

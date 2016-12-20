@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAddressToUsers extends Migration
+class AddAccountIDColumnInUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddAddressToUsers extends Migration
     public function up()
     {
         Schema::table('users', function($table){
-          $table->integer('address_id')->unsigned();
-          $table->foreign('address_id')->references('id')->on('addresses');
+          $table->integer('account_id')->unsigned();
+          $table->foreign('account_id')->references('id')->on('accounts');
         });
     }
 
@@ -27,7 +27,7 @@ class AddAddressToUsers extends Migration
     public function down()
     {
         Schema::table('users', function($table){
-          $table->dropColumn('address_id');
+          $table->dropColumn('account_id');
         });
     }
 }

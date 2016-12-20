@@ -16,8 +16,8 @@ class CreateAddressesTable extends Migration
       Schema::create('addresses', function (Blueprint $table) {
           $table->increments('id');
           $table->string('line1');
-          $table->string('line2');
-          $table->string('line3');
+          $table->string('line2')->nullable();
+          $table->string('line3')->nullable();
           $table->string('city');
           $table->string('country');
           $table->string('postcode');

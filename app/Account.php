@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
@@ -56,5 +57,16 @@ class Account extends Model
     public function type()
     {
         return $this->type;
+    }
+
+    /**
+     * Set the type of the account.
+     * 'a' = Admin account.
+     * 'b' = Company account.
+     * 'c' = Student Account.
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }
