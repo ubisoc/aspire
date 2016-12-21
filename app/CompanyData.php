@@ -17,6 +17,13 @@ class CompanyData extends Model
   protected $dates = ['deleted_at'];
 
   /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'company_data';
+
+  /**
    * Get the account associated with this company.
    */
   public function account()

@@ -13,5 +13,18 @@
             </div>
         </div>
     </div>
+
+    <table>
+      <tr>
+        <td><a href="/jobs">Job/Internship Opportunities</a></td>
+        <td><a href="/profile">Profile</a></td>
+        <td><a href="/applications">Applications</a></td>
+      </tr>
+      <tr>
+        <td><a href="/messages">Messages</a></td>
+        <td><a href="/notifications">Notifications</a></td>
+        <td><a href="/settings">Settings</a></td>
+      </tr>
+    </table>
 </div>
 @endsection

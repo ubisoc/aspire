@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+// Dashboard Routes for students
+Route::get('/jobs', 'JobController@index');
+Route::get('/profile', 'ProfileController@index');
+Route::get('/applications', 'ApplicationController@index');
+Route::get('/messages', 'MessageController@index');
+Route::get('/notifications', 'NotificationController@index');
+Route::get('/settings', 'SettingsController@index');
