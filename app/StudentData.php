@@ -17,6 +17,13 @@ class StudentData extends Model
   protected $dates = ['deleted_at'];
 
   /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'student_data';
+
+  /**
    * Get the account associated with this student data.
    */
   public function account()

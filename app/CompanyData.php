@@ -56,6 +56,14 @@ class CompanyData extends Model
   }
 
   /**
+   * Get all the roles advertised by this company.
+   */
+  public function roles()
+  {
+      return $this->hasMany('App\Role');
+  }
+
+  /**
    * Get the id of the student data.
    */
   public function id()
