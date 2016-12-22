@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 // Dashboard Routes for students
-Route::get('/jobs', 'JobController@index');
+Route::get('/roles', 'RoleController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/applications', 'ApplicationController@index');
 Route::get('/messages', 'MessageController@index');

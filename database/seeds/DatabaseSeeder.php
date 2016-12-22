@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             $companyData->billingAddress()->save($address);
             $roles = factory(App\Role::class, 3)->make();
             foreach($roles as $role) {
+              $role->company_name = $companyData->name;
               $companyData->roles()->save($role);
             }
         });

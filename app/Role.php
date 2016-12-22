@@ -21,7 +21,7 @@ class Role extends Model
    */
   public function company()
   {
-      return $this->belongsTo('App\CompanyData');
+      return $this->belongsTo('App\CompanyData', 'company_data_id');
   }
 
   /**
@@ -134,5 +134,21 @@ class Role extends Model
   public function setQualifications($qualifications)
   {
       $this->qualifications = $qualifications;
+  }
+
+  /**
+   * Get the name of the company who are advertising this role.
+   */
+  public function companyName()
+  {
+      return $this->company_name;
+  }
+
+  /**
+   * Set the name of the company who are advertising this role.
+   */
+  public function setCompanyName($name)
+  {
+      $this->company_name = $name;
   }
 }
