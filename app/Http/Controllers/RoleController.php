@@ -25,11 +25,9 @@ class RoleController extends Controller
      */
     public function index(Request $request, Role $roles)
     {
+        var_dump($request->all());
         // The parameters which the search bar will have to search the Roles Table.
         $searchParameters = ['title', 'description', 'skills', 'qualifications', 'company_name'];
-
-        // The parameters which require a comparison on the Roles Table to retrieve results.
-        $comparisonSearchParameters = ['start_date', 'end_date', 'salary'];
 
         // Search through all the rows in the table using the search parameters
         // and the queries provided.
@@ -40,7 +38,26 @@ class RoleController extends Controller
           }
         }
 
-        // TODO: Search table using comparison search parameters.
+        // Search table using start date parameter.
+        if($request->get('start_date') != '') {
+          $query = $request->get('start_date');
+          $roles = $roles->where('start_date', '<', $query);
+        }
+
+        // Search table using end date parameter.
+        if($request->get('end_date') != '') {
+          $query = $request->get('end_date');
+          $roles = $roles->where('end_date', '>', $query);
+        }
+
+        // Search table using salary parameter.
+        if($request->get('salary') != '') {
+          $query = $request->get('salary');
+          $roles = $roles->where('salary', '>=', $query-20000);
+          if($query <= 100000) {
+            $roles = $roles->where('salary', '<', $query);
+          }
+        }
 
         // Order the results according to the parameters provided.
         if($request->get('order') != '' && $request->get('orderParameter') != '') {

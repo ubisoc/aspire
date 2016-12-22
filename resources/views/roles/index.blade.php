@@ -19,16 +19,25 @@
                   Description:<br>
                   <input type="text" name="description"><br>
                   Start Date:<br>
-                  <input type="text" name="start_date"><br>
+                  <input type="text" class="datepicker" name="start_date"/><br>
                   End Date:<br>
-                  <input type="text" name="end_date"><br>
+                  <input type="text" class="datepicker" name="end_date"/><br>
                   Salary:<br>
-                  <input type="text" name="salary"><br>
+                  <select name="salary">
+                    <option value="20000">{{"Less than 20,000"}}</option>
+                    <option value="40000">{{"More than 20,000 and less than 40,000"}}</option>
+                    <option value="60000">{{"More than 40,000 and less than 60,000"}}</option>
+                    <option value="80000">{{"More than 60,000 and less than 80,000"}}</option>
+                    <option value="10000">{{"More than 80,000 and less than 100,000"}}</option>
+                    <option value="12000">{{"More than 100,000"}}</option>
+                  </select><br><br>
                   Skills:<br>
                   <input type="text" name="skills"><br>
                   Qualfications:<br>
                   <input type="text" name="qualifications"><br>
                   <input type="submit" value="Submit"><br>
+
+
                 </form>
 
                 <table>
@@ -61,3 +70,18 @@
     </div>
 </div>
 @endsection
+
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+         $( ".datepicker" ).datepicker();
+    });
+</script>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+       alert('hello')
+   });
+</script>
