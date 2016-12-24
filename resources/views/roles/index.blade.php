@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div id="accordion" class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
@@ -71,17 +71,11 @@
 </div>
 @endsection
 
-<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-
-<script>
-    $(function() {
-         $( ".datepicker" ).datepicker();
-    });
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
-   $(document).ready(function() {
-       alert('hello')
-   });
+$(document).ready(function(){
+    $("#accordion").dialog();
+});
 </script>
