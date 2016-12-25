@@ -19,11 +19,12 @@
                   Description:<br>
                   <input type="text" name="description"><br>
                   Start Date:<br>
-                  <input type="text" class="datepicker" name="start_date"/><br>
+                  <input type="text" name="start_date"/><br>
                   End Date:<br>
-                  <input type="text" class="datepicker" name="end_date"/><br>
+                  <input type="text" name="end_date"/><br>
                   Salary:<br>
                   <select name="salary">
+                    <option value="">{{"N/A"}}</option>
                     <option value="20000">{{"Less than 20,000"}}</option>
                     <option value="40000">{{"More than 20,000 and less than 40,000"}}</option>
                     <option value="60000">{{"More than 40,000 and less than 60,000"}}</option>
@@ -73,9 +74,3 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#accordion").dialog();
-});
-</script>

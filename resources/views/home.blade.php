@@ -17,7 +17,7 @@
     <table>
       <tr>
         <td><a href="/roles">Job/Internship Opportunities</a></td>
-        <td><a href="/profile">Profile</a></td>
+        <td><a href={{"/profile/index"}}>Profile</a></td>
         <td><a href="/applications">Applications</a></td>
       </tr>
       <tr>

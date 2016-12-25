@@ -21,7 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 // Dashboard Routes for students
 Route::get('/roles', 'RoleController@index');
-Route::get('/profile', 'ProfileController@index');
+Route::get('/profile/index', 'ProfileController@index');
+Route::match(['POST', 'GET'], '/profile/edit', 'ProfileController@edit');
+Route::get('/profile/delete', 'ProfileController@delete');
 Route::get('/applications', 'ApplicationController@index');
 Route::get('/messages', 'MessageController@index');
 Route::get('/notifications', 'NotificationController@index');

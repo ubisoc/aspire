@@ -34,4 +34,44 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Address');
     }
+
+    /**
+     * Gets the User's Account.
+     */
+    public function account()
+    {
+        return $this->belongsTo('App\Account');
+    }
+
+    /**
+     * Sets the User's First Name.
+     */
+    public function setFirstName($name)
+    {
+        return $this->first_name = $name;
+    }
+
+    /**
+     * Sets the User's Last Name.
+     */
+    public function setLastName($name)
+    {
+        return $this->last_name = $name;
+    }
+
+    /**
+     * Sets the User's Email.
+     */
+    public function setEmail($email)
+    {
+        return $this->email = $email;
+    }
+
+    /**
+     * Sets the User's First Name.
+     */
+    public function setNumber($number)
+    {
+        return $this->mobile_number = $number;
+    }
 }
