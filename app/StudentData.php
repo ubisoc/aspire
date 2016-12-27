@@ -110,4 +110,36 @@ class StudentData extends Model
   {
       $this->job_pref = $pref;
   }
+
+  /**
+   * Get the file name of the CV uploaded by the student.
+   */
+  public function cvName()
+  {
+      return $this->cv_name;
+  }
+
+  /**
+   * Store the file name of the CV uploaded by the student.
+   */
+  public function setCVName($name)
+  {
+      $this->cv_name = $name;
+  }
+
+  /**
+   * Get the file name of the cover letter uploaded by the student.
+   */
+  public function coverLetterName()
+  {
+      return $this->cover_letter_name;
+  }
+
+  /**
+   * Store the file name of the cover letter uploaded by the student.
+   */
+  public function setCoverLetterName($name)
+  {
+      $this->cover_letter_name = $name;
+  }
 }

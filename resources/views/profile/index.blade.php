@@ -68,6 +68,36 @@
                 </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">CV/Resume</div>
+
+                <div class="panel-body">
+                    {{$data->cv_name}}
+                </div>
+
+                <form method="GET" action="download">
+                  {{csrf_field()}}
+                  <div class="panel-body">
+                      <button name="cv" type="submit">Download CV</button>
+                  </div>
+                </form>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Cover Letter</div>
+
+                <div class="panel-body">
+                    {{$data->cover_letter_name}}
+                </div>
+
+                <form method="GET" action="download">
+                  {{csrf_field()}}
+                  <div class="panel-body">
+                      <button name="cover_letter" type="submit">Download Cover Letter</button>
+                  </div>
+                </form>
+            </div>
+
             <a href="/profile/edit">Edit</a>
         </div>
     </div>
