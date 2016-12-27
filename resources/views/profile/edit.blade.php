@@ -49,7 +49,7 @@
                 <br>
                   <input type="file" name="cv"></input>
                   <button name="uploaded" type="submit">Save CV/Resume</button>
-                  <button name="deleted" type="submit">Delete CV/Resume</button>
+                  <button name="cv" type="submit" value="deleted">Delete CV/Resume</button>
                 </br>
               </div>
             </form>
@@ -60,7 +60,7 @@
                 <br>
                   <input type="file" name="cover_letter"></input>
                   <button type="submit">Save Cover Letter</button>
-                  <button name="deleted" type="submit">Delete Cover Letter</button>
+                  <button name="cover_letter" type="submit" value="deleted">Delete Cover Letter</button>
                 </br>
               </div>
             </form>

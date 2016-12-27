@@ -109,6 +109,28 @@ class ProfileController extends Controller
           $fileType = 'cover_letter';
         }
 
+        // Retrieve the User ID.
+        $user = \Auth::user();
+        $userId = $user->id;
+
+        $account = $user->account()->firstOrFail();
+        $data = $account->studentData()->firstOrFail();
+
+        // Delete all existing CVs or Cover Letters
+        $success = \File::cleanDirectory('storage/app/' . $userId . '/' . $fileType);
+
+        // If the CV or Cover Letter was intentionally deleted, return back.
+        if($request->get($fileType) == 'deleted') {
+          if ($fileType == 'cv') {
+            $data->setCVName(null);
+          }
+          else {
+            $data->setCoverLetterName(null);
+          }
+          $data->save();
+          return back();
+        }
+
         // Validate form fields.
         $this->validate($request, [
             $fileType => 'required|file',
@@ -121,30 +143,17 @@ class ProfileController extends Controller
         // Get the extension of the file.
         $extension = $file->extension();
 
-        // Retrieve the User ID.
-        $user = \Auth::user();
-        $userId = $user->id;
 
-        $account = $user->account()->firstOrFail();
-
-        // If the account is a company, retrieve the company data,
-        // If the account is a student, retrieve the student data.
-        if ($account->type() == 'b') {
-          $data = $account->companyData()->firstOrFail();
+        if ($fileType == 'cv') {
+          $data->setCVName($fileName);
         }
         else {
-          $data = $account->studentData()->firstOrFail();
-          if ($fileType == 'cv') {
-            $data->setCVName($fileName);
-          }
-          else {
-            $data->setCoverLetterName($fileName);
-          }
-          $data->save();
+          $data->setCoverLetterName($fileName);
         }
+        $data->save();
 
         // Store the file onto the local disk.
-        $file->storeAs($userId . '/', $fileName);
+        $file->storeAs($userId . '/' . $fileType . '/', $fileName);
 
         return back();
     }
@@ -185,6 +194,10 @@ class ProfileController extends Controller
           }
         }
 
-        return response()->download(public_path() . '/storage/app/' . $userId . '/' . $fileName);
+        if ($fileName == null) {
+          return back();
+        }
+
+        return response()->download(public_path() . '/storage/app/' . $userId . '/' . $fileType . '/' . $fileName);
     }
 }
