@@ -101,6 +101,10 @@ class ProfileController extends Controller
      */
     public function upload(Request $request)
     {
+        // Retrieve the User ID.
+        $user = \Auth::user();
+        $userId = $user->id;
+
         // Get the file type and check if a file was uploaded.
         if(array_key_exists('cv',$request->all())) {
           $fileType = 'cv';
@@ -108,10 +112,6 @@ class ProfileController extends Controller
         else {
           $fileType = 'cover_letter';
         }
-
-        // Retrieve the User ID.
-        $user = \Auth::user();
-        $userId = $user->id;
 
         $account = $user->account()->firstOrFail();
         $data = $account->studentData()->firstOrFail();
@@ -140,15 +140,13 @@ class ProfileController extends Controller
         $file = request()->file($fileType);
         $fileName = $file->getClientOriginalName();
 
-        // Get the extension of the file.
-        $extension = $file->extension();
-
+        $path = $userId . '/' . $fileType . '/' . $fileName;
 
         if ($fileType == 'cv') {
-          $data->setCVName($fileName);
+          $data->setCVName($path);
         }
         else {
-          $data->setCoverLetterName($fileName);
+          $data->setCoverLetterName($path);
         }
         $data->save();
 
@@ -169,35 +167,21 @@ class ProfileController extends Controller
         $user = \Auth::user();
         $userId = $user->id;
 
+        $account = $user->account()->first();
+        $data = $account->studentData()->firstOrFail();
+
         // Get the file type.
         if(array_key_exists('cv',$request->all())) {
-          $fileType = 'cv';
+          $filePath = $data->cvName();
         }
         else {
-          $fileType = 'cover_letter';
+          $filePath = $data->coverLetterName();
         }
 
-        $account = $user->account()->first();
-
-        // If the account is a company, retrieve the company data,
-        // If the account is a student, retrieve the student data.
-        if ($account->type() == 'b') {
-          $data = $account->companyData()->firstOrFail();
-        }
-        else {
-          $data = $account->studentData()->firstOrFail();
-          if ($fileType == 'cv') {
-            $fileName = $data->cvName();
-          }
-          else {
-            $fileName = $data->coverLetterName();
-          }
-        }
-
-        if ($fileName == null) {
+        if ($filePath == null) {
           return back();
         }
 
-        return response()->download(public_path() . '/storage/app/' . $userId . '/' . $fileType . '/' . $fileName);
+        return response()->download(public_path() . '/storage/app/' . $filePath);
     }
 }

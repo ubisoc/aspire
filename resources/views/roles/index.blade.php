@@ -61,7 +61,7 @@
                           <td>{{"Salary: " . $role->salary}}</td>
                           <td>{{$role->skills}}</td>
                           <td>{{$role->qualifications}}</td>
-                          <td>Apply</td>
+                          <td><a href="applications/create/{{$role->id}}">Apply</a></td>
                       </tr>
                     @endforeach
                 </table>

@@ -17,35 +17,35 @@ class Application extends Model
   protected $dates = ['deleted_at'];
 
   /**
-   * Get the company associated with this role.
+   * Get the student who sent in this application.
    */
   public function student()
   {
-      return $this->belongsTo('App\StudentData');
+      return $this->belongsTo('App\StudentData', 'student_data_id');
   }
 
   /**
-   * Get the title of the role.
+   * Get the role.
    */
-  public function company()
+  public function role()
   {
-      return $this->belongsTo('App\CompanyData');
+      return $this->belongsTo('App\Role');
   }
 
   /**
-   * Get the file name of the resume which was uploaded for this application.
+   * Get the file name of the CV which was uploaded for this application.
    */
-  public function resumeName()
+  public function cvName()
   {
-      return $this->resume_name;
+      return $this->cv_name;
   }
 
   /**
-   * Set the file name of the resume which was uploaded for this application.
+   * Set the file name of the CV which was uploaded for this application.
    */
-  public function setResumeName($name)
+  public function setCVName($name)
   {
-      $this->resume_name = $name;
+      $this->cv_name = $name;
   }
 
   /**

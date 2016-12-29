@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $migrate = Artisan::call('migrate', array('--path' => 'app/migrations'));
 
+        \File::cleanDirectory('storage');
+
         // $address = factory(App\Address::class)->make();
         // $account = factory(App\Account::class, 'student')->create();
         // $user = factory(App\User::class)->make();

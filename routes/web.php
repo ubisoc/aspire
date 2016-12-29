@@ -21,12 +21,21 @@ Route::get('/home', 'HomeController@index');
 
 // Dashboard Routes for students
 Route::get('/roles', 'RoleController@index');
+
+// Profile Routes
 Route::get('/profile/index', 'ProfileController@index');
 Route::match(['POST', 'GET'], '/profile/edit', 'ProfileController@edit');
 Route::get('/profile/delete', 'ProfileController@delete');
 Route::post('/profile/upload', 'ProfileController@upload');
 Route::get('/profile/download', 'ProfileController@download');
-Route::get('/applications', 'ApplicationController@index');
+
+// Application routes
+Route::get('/applications/index', 'ApplicationController@index');
+Route::match(['POST', 'GET'], '/applications/create/{roleId}', 'ApplicationController@create');
+Route::get('/applications/download/{applicationId}/{fileType}', 'ApplicationController@download');
+Route::get('/applications/{applicationId}/show', 'ApplicationController@show');
+Route::get('/applications/{applicationId}/delete', 'ApplicationController@delete');
+
 Route::get('/messages', 'MessageController@index');
 Route::get('/notifications', 'NotificationController@index');
 Route::get('/settings', 'SettingsController@index');

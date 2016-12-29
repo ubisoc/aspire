@@ -15,12 +15,12 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function(Blueprint $table){
           $table->increments('id');
-          $table->integer('student_id')->unsigned();
-          $table->foreign('student_id')->references('id')->on('accounts');
-          $table->integer('company_id')->unsigned();
-          $table->foreign('company_id')->references('id')->on('accounts');
-          $table->string('resume_name');
-          $table->string('cover_letter_name');
+          $table->integer('student_data_id')->unsigned();
+          $table->foreign('student_data_id')->references('id')->on('student_data');
+          $table->integer('role_id')->unsigned();
+          $table->foreign('role_id')->references('id')->on('roles');
+          $table->string('cv_name')->nullable();
+          $table->string('cover_letter_name')->nullable();
           $table->softDeletes();
           $table->timestamps();
         });

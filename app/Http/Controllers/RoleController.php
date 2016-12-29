@@ -25,7 +25,6 @@ class RoleController extends Controller
      */
     public function index(Request $request, Role $roles)
     {
-        var_dump($request->all());
         // The parameters which the search bar will have to search the Roles Table.
         $searchParameters = ['title', 'description', 'skills', 'qualifications', 'company_name'];
 
