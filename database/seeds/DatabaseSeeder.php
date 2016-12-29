@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('applications')->delete();
         DB::table('addresses')->delete();
+        DB::table('notifications')->delete();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $migrate = Artisan::call('migrate', array('--path' => 'app/migrations'));

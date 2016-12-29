@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Application;
 use App\Role;
 use App\User;
+use App\Notifications\ApplicationSent;
 use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
@@ -97,6 +98,8 @@ class ApplicationController extends Controller
         // Store the CV and Cover Letter onto the local disk.
         $cv->storeAs($userId . '/applications/' . $applicationId . '/cv/', $cvName);
         $coverLetter->storeAs($userId . '/applications/' . $applicationId . '/cover_letter/', $coverLetterName);
+
+        $user->notify(new ApplicationSent($application));
 
         return redirect()->action('ApplicationController@index');
       }
