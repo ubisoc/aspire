@@ -11,6 +11,28 @@
                     Notifications!
                 </div>
             </div>
+
+            <table>
+              <tr>
+                <td>ID</td>
+                <td>Type</td>
+                <td>Notifiable ID</td>
+                <td>Notifiable Type</td>
+                <td>Data</td>
+                <td>Read At</td>
+              </tr>
+                @foreach($notifications as $notification)
+                  <tr>
+                      <td>{{$notification->id}}</td>
+                      <td>{{$notification->type}}</td>
+                      <td>{{$notification->notifiable_id}}</td>
+                      <td>{{$notification->notifiable_type}}</td>
+                      <td><a href="/notifications/{{$notification->id}}/show">View Notification</a></td>
+                      <td>{{$notification->read_at}}</td>
+                  </tr>
+                @endforeach
+            </table>
+            {{$notifications->render()}}
         </div>
     </div>
 </div>

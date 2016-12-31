@@ -68,4 +68,18 @@ class RoleController extends Controller
 
         return view('roles/index', ["roles" => $roles]);
     }
+
+    /**
+     * Show a role this student can apply to.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $roleId)
+    {
+        $user = \Auth::user();
+        $role = Role::where('id', '=', $roleId)->firstOrFail();
+        $company = $role->company()->firstOrFail();
+
+        return view('roles/show', ["role" => $role, "user" => $user, "company" => $company]);
+    }
 }

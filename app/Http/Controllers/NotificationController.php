@@ -23,6 +23,36 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        $user = \Auth::user();
+        $notifications = $user->notifications()->take(100)->paginate(5);
+
+        return view('notifications/index', ['notifications' => $notifications, 'user' => $user]);
+    }
+
+    /**
+     * Show the one notification this student has received.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $notificationId)
+    {
+        $user = \Auth::user();
+        $notification = $user->notifications()->where('id', '=', $notificationId)->firstOrFail();
+        $notification->markAsRead();
+
+        return view('notifications/show', ['notification' => $notification, 'user' => $user]);
+    }
+
+    /**
+     * Delete a notification which a student has received.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, $notificationId)
+    {
+        $notification = Notification::where('id', '=', $notificationId)->firstOrFail();
+        $notification->delete();
+
         return view('notifications/index');
     }
 }

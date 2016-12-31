@@ -16,13 +16,13 @@
 
     <table>
       <tr>
-        <td><a href="/roles">Job/Internship Opportunities</a></td>
+        <td><a href="/roles/index">Job/Internship Opportunities</a></td>
         <td><a href={{"/profile/index"}}>Profile</a></td>
-        <td><a href="/applications">Applications</a></td>
+        <td><a href="/applications/index">Applications</a></td>
       </tr>
       <tr>
         <td><a href="/messages">Messages</a></td>
-        <td><a href="/notifications">Notifications</a></td>
+        <td><a href="/notifications/index">Notifications</a></td>
         <td><a href="/settings">Settings</a></td>
       </tr>
     </table>

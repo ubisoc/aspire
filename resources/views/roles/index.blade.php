@@ -45,23 +45,19 @@
                   <tr>
                     <td>Company</td>
                     <td>Role</td>
-                    <td>Description</td>
                     <td>Timeframe</td>
                     <td>Salary</td>
-                    <td>Skills</td>
                     <td>Qualifications</td>
                     <td>Apply</td>
                   </tr>
                     @foreach($roles as $role)
                       <tr>
-                          <td>{{$role->company()->first()->name}}</td>
-                          <td>{{$role->title}}</td>
-                          <td>{{$role->description}}</td>
+                          <td>{{$role->company()->firstOrFail()->name}}</td>
+                          <td><a href="/roles/{{$role->id}}/show">{{$role->title}}</a></td>
                           <td>{{"Start Date: " . $role->startDate() . ", End Date: " . $role->endDate()}}</td>
                           <td>{{"Salary: " . $role->salary}}</td>
-                          <td>{{$role->skills}}</td>
                           <td>{{$role->qualifications}}</td>
-                          <td><a href="applications/create/{{$role->id}}">Apply</a></td>
+                          <td><a href="/applications/{{$role->id}}/create">Apply</a></td>
                       </tr>
                     @endforeach
                 </table>

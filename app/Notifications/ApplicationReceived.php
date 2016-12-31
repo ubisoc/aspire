@@ -6,22 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Application;
 
-class ApplicationSent extends Notification
+class ApplicationReceived extends Notification
 {
     use Queueable;
-
-    protected $application;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Application $application)
+    public function __construct()
     {
-        $this->application = $application;
+        //
     }
 
     /**
@@ -32,7 +29,7 @@ class ApplicationSent extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
 
     /**
@@ -43,14 +40,10 @@ class ApplicationSent extends Notification
      */
     public function toMail($notifiable)
     {
-        $role = $this->application->role()->firstOrFail();
         return (new MailMessage)
-                    ->line('You have successfully sent off an application!')
-                    ->line('You have applied for:')
-                    ->line('Company: ' . $role->company_name)
-                    ->line('Role: ' . $role->title)
-                    ->action('View Application', '/applications/{applicationId}/show')
-                    ->line('Thank you for applying through Aspire!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', 'https://laravel.com')
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -61,6 +54,8 @@ class ApplicationSent extends Notification
      */
     public function toArray($notifiable)
     {
-        return $this->application->toArray();
+        return [
+            //
+        ];
     }
 }
