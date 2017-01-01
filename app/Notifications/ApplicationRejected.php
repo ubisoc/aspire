@@ -11,14 +11,16 @@ class ApplicationRejected extends Notification
 {
     use Queueable;
 
+    protected $application;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Application $application)
     {
-        //
+        $this->application = $application;
     }
 
     /**
@@ -29,7 +31,7 @@ class ApplicationRejected extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -40,10 +42,13 @@ class ApplicationRejected extends Notification
      */
     public function toMail($notifiable)
     {
+        $role = $this->application->role()->firstOrFail();
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+                    ->line('Unfortunately, your application for the following role has been rejected.')
+                    ->line('Company: ' . $role->company_name)
+                    ->line('Role: ' . $role->title)
+                    ->action('View Application', '/applications/' . $this->application->id . '/show');
+                    ->line('Thank you for applying through Aspire. We hope you have more success in the future.');
     }
 
     /**
@@ -54,8 +59,6 @@ class ApplicationRejected extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        $this->application->toArray();
     }
 }

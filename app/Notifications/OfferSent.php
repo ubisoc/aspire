@@ -6,22 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Application;
 
-class ApplicationAccepted extends Notification
+class OfferSent extends Notification
 {
     use Queueable;
 
     protected $application;
+    protected $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Application $application)
+    public function __construct(Application $application, User $user)
     {
         $this->application = $application;
+        $this->user = $user;
     }
 
     /**
@@ -43,13 +44,15 @@ class ApplicationAccepted extends Notification
      */
     public function toMail($notifiable)
     {
-        $role = $this->application->role()->firstOrFail();
         return (new MailMessage)
-                    ->line('Your application for the following role has been accepted!')
-                    ->line('Company: ' . $role->company_name)
+                    ->line('An offer has been sent to the following candidate:')
+                    ->line('Name: ' . $candidateName)
+                    ->line('The offer was sent by:')
+                    ->line('Employee: ' . $employeeName)
+                    ->line('For the following role:')
                     ->line('Role: ' . $role->title)
-                    ->action('View Application', '/applications/' . $this->application->id . '/show');
-                    ->line('Thank you for applying through Aspire!');
+                    ->action('View Offer', '/applications/' . $this->application->id . '/show')
+                    ->line('Thank you for using Aspire!');
     }
 
     /**
@@ -60,6 +63,6 @@ class ApplicationAccepted extends Notification
      */
     public function toArray($notifiable)
     {
-        return $this->application->toArray();
+        return array_merge($this->application->toArray(), $this->user->toArray());
     }
 }

@@ -6,9 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Application;
 
-class ApplicationAccepted extends Notification
+class OfferRejected extends Notification
 {
     use Queueable;
 
@@ -43,13 +42,10 @@ class ApplicationAccepted extends Notification
      */
     public function toMail($notifiable)
     {
-        $role = $this->application->role()->firstOrFail();
         return (new MailMessage)
-                    ->line('Your application for the following role has been accepted!')
-                    ->line('Company: ' . $role->company_name)
-                    ->line('Role: ' . $role->title)
-                    ->action('View Application', '/applications/' . $this->application->id . '/show');
-                    ->line('Thank you for applying through Aspire!');
+                    ->line('Unfortunately, ' . $student . ' has rejected your offer. Better luck next time.')
+                    ->action('View Offer', '/applications/' . $this->application->id . '/show')
+                    ->line('Thank you for using Aspire!');
     }
 
     /**

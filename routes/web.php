@@ -19,7 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-// Dashboard Routes for students
+//// Dashboard Routes for companies
+
+// Student Routes
+Route::get('/students/index'. 'StudentController@index');
+Route::get('/students/{studentId}/show', 'StudentController@show');
+
+// Company Profile Routes
+Route::get('/company-profile/index', 'CompanyProfileController@index');
+Route::match(['POST', 'GET'], '/company-profile/edit', 'CompanyProfileController@edit');
+Route::get('/company-profile/delete', 'CompanyProfileController@delete');
+
+//// Dashboard Routes for students
+
+// Role Routes
 Route::get('/roles/index', 'RoleController@index');
 Route::get('/roles/{roleId}/show', 'RoleController@show');
 

@@ -49,7 +49,7 @@ class ApplicationSent extends Notification
                     ->line('You have applied for:')
                     ->line('Company: ' . $role->company_name)
                     ->line('Role: ' . $role->title)
-                    ->action('View Application', '/applications/{applicationId}/show')
+                    ->action('View Application', '/applications/' . $this->application->id . '/show')
                     ->line('Thank you for applying through Aspire!');
     }
 
